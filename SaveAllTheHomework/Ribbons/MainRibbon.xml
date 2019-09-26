@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab idMso="TabAddIns">
+        <group id="MyGroup"
+               label="收作业智能姬">
+              <button id="SaveAllTheHomework" size="large" imageMso="FileSave" label="保存作业" onAction="OnSaveAllHomework"/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+
