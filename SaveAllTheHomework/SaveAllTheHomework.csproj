@@ -186,6 +186,7 @@
     </Compile>
     <Compile Include="Ribbons\MainRibbon.cs" />
     <Compile Include="Source\HomeworkBot.cs" />
+    <Compile Include="Source\HomeworkItem.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>

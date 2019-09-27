@@ -32,8 +32,10 @@ namespace SaveAllTheHomework
          {
             aHomeworkBot = new HomeworkBot();
 
-            MainRibbon mainRibbon = new MainRibbon();
-            mainRibbon.aHomeworkBot = aHomeworkBot;
+            MainRibbon mainRibbon = new MainRibbon
+            {
+                aHomeworkBot = aHomeworkBot
+            };
             return mainRibbon;
          }
 
