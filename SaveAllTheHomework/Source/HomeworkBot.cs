@@ -36,11 +36,30 @@ namespace SaveAllTheHomework.Source
                 /// 
                 /// myItem.CreationTime System.DateTime
                 /// myItem.ConversationTopic System.String
-                /// 		SenderEmailAddress	"***REMOVED***"	System.String
+                /// SentOn
+
+                String sender = "";
+
+                /// 尝试解析发件人
+                try
+                {
+                    sender = myItem.SenderEmailAddress;
+                }
+                catch (Exception e1) {
+                    try
+                    {
+                        sender = myItem.Sender.Address;
+                    }
+                    catch (Exception e2)
+                    {
+
+                    };
+                };
 
 
-
-                String sender = myItem.SenderEmailAddress;
+                if (sender.Equals("")) {
+                    continue;
+                }
 
                 HomeworkItem aHomeworkItem = new HomeworkItem
                 {
@@ -67,15 +86,14 @@ namespace SaveAllTheHomework.Source
                     aHomeworkItem.StudentID = GetStudentIDFromString(myItem.ConversationTopic);
                 }
 
-                // 邮件发送时间 
-                aHomeworkItem.CreationTime = myItem.CreationTime;
-
-
                 // 如果都识别不到
                 if (aHomeworkItem.StudentID == 0)
                 {
                     continue;
                 };
+
+                /// 邮件发送时间 
+                aHomeworkItem.SentOn = myItem.SentOn;
 
                 // 如果没有附件
                 if (myItem.Attachments.Count == 0)
@@ -83,6 +101,7 @@ namespace SaveAllTheHomework.Source
                     continue;
                 }
 
+                /// 获取附件
                 aHomeworkItem.Attachments = myItem.Attachments;
 
                 HomeworkList.Add(aHomeworkItem);
@@ -90,9 +109,10 @@ namespace SaveAllTheHomework.Source
 
             }
 
-            //HomeworkList.Sort()
+            HomeworkList.Sort();
 
 
+            
             MessageBox.Show(ActivedFolder.FullFolderPath + " 里的所有附件都已经保存下来辣！");
 
 
