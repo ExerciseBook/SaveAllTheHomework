@@ -9,6 +9,7 @@ using Office = Microsoft.Office.Core;
 using System.Collections;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace SaveAllTheHomework.Source
 {
@@ -109,10 +110,61 @@ namespace SaveAllTheHomework.Source
 
             }
 
+            // 对所有右键按照
+            //  学号第一次序升序
+            //  邮件发送时间第二次徐升序 排序
             HomeworkList.Sort();
 
+            for (int i=0; i<HomeworkList.Count(); i++) {
+                //foreach (HomeworkItem k in HomeworkList) {
 
-            
+                // 如果相同学号存在更新版本的作业则跳过旧版本作业
+                if (i < HomeworkList.Count() - 1) {
+                    if (HomeworkList[i].StudentID == HomeworkList[i + 1].StudentID) continue;
+                }
+
+                HomeworkItem k = HomeworkList[i];
+
+                // 将附件保存
+                String RootFolder = "D:\\AppData\\outlook\\";
+                if (!Directory.Exists(RootFolder)) Directory.CreateDirectory(RootFolder);
+
+                if (k.Attachments.Count == 1)
+                {
+                    foreach (dynamic myAttachment in k.Attachments)
+                    {
+                        String FileName = myAttachment.FileName;
+                        String[] FileNames = FileName.Split('.');
+
+                        String OutFileName = k.StudentID + "." + FileNames[FileNames.Count() - 1];
+
+                        if (OutFileName.Equals(FileName))
+                        {
+                            myAttachment.SaveAsFile(RootFolder + FileName);
+                        }
+                        else
+                        {
+                            String TempFolder = RootFolder + k.StudentID + "\\";
+                            if (!Directory.Exists(TempFolder)) Directory.CreateDirectory(TempFolder);
+                            myAttachment.SaveAsFile(TempFolder + FileName);
+                        }
+                    }
+                }
+                else {
+                    foreach (dynamic myAttachment in k.Attachments)
+                    {
+                        String TempFolder = RootFolder + k.StudentID + "\\";
+                        if (!Directory.Exists(TempFolder)) Directory.CreateDirectory(TempFolder);
+                        myAttachment.SaveAsFile(TempFolder + myAttachment.FileName);
+
+                    }
+                }
+
+            }
+
+
+
+
             MessageBox.Show(ActivedFolder.FullFolderPath + " 里的所有附件都已经保存下来辣！");
 
 
