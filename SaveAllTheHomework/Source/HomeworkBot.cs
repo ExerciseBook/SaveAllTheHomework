@@ -112,7 +112,7 @@ namespace SaveAllTheHomework.Source
 
             // 对所有邮件按照
             //  学号第一次序升序
-            //  邮件发送时间第二次徐升序 排序
+            //  邮件发送时间第二次序升序 排序
             HomeworkList.Sort();
 
             for (int i=0; i<HomeworkList.Count(); i++) {
