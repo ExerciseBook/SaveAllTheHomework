@@ -110,7 +110,7 @@ namespace SaveAllTheHomework.Source
 
             }
 
-            // 对所有右键按照
+            // 对所有邮件按照
             //  学号第一次序升序
             //  邮件发送时间第二次徐升序 排序
             HomeworkList.Sort();
