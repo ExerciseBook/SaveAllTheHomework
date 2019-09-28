@@ -15,7 +15,7 @@ namespace SaveAllTheHomework.Source
             if (x.StudentID < y.StudentID) return -1;
             if (x.StudentID > y.StudentID) return 1;
             if (x.SentOn > y.SentOn) return 1;
-            if (x.SentOn < y.SentOn) return 1;
+            if (x.SentOn < y.SentOn) return -1;
 
             return 0;
         }
