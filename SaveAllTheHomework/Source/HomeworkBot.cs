@@ -136,9 +136,10 @@ namespace SaveAllTheHomework.Source
                         String FileName = myAttachment.FileName;
                         String[] FileNames = FileName.Split('.');
 
-                        String OutFileName = k.StudentID + "." + FileNames[FileNames.Count() - 1];
+                        //String OutFileName = k.StudentID + "." + FileNames[FileNames.Count() - 1];
 
-                        if (OutFileName.Equals(FileName))
+                        //if (OutFileName.Equals(FileName))
+                        if ( FileNames[0].Equals( ""+k.StudentID ) )
                         {
                             myAttachment.SaveAsFile(RootFolder + FileName);
                         }
